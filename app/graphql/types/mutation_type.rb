@@ -1,10 +1,8 @@
 module Types
   class MutationType < Types::BaseObject
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World"
-    end
+    field :detach_tag_from_movie, mutation: Mutations::DetachTagFromMovie
+    field :attach_tag_to_movie, mutation: Mutations::AttachTagToMovie
+    field :tag_delete, mutation: Mutations::TagDelete
+    field :tag_create, mutation: Mutations::TagCreate
   end
 end
