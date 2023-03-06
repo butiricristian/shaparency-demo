@@ -44,7 +44,7 @@ module Types
         movies = movies.where("rating = ?", rating_eq)
       end
       if rating_gt.present?
-        movies = movies.where("rating = ?", rating_gt)
+        movies = movies.where("rating > ?", rating_gt)
       end
 
       movies

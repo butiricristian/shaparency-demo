@@ -1,5 +1,7 @@
 module Mutations
   class AttachTagToMovie < BaseMutation
+    include ValidationErrorsConcern
+
     field :tag, Types::TagType
     field :movie, Types::MovieType
 
@@ -19,15 +21,7 @@ module Mutations
           errors: []
         }
       else
-        validation_errors = tag.errors.to_hash.map do |attribute, message|
-          {
-            attribute: attribute.to_s.camelize(:lower),
-            message: message.join(", "),
-          }
-        end
-        {
-          errors: validation_errors
-        }
+        { errors: validation_errors(tag) }
       end
     end
   end

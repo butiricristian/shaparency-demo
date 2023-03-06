@@ -4,6 +4,8 @@ module Mutations
   class TagDelete < BaseMutation
     description "Deletes a tag by ID"
 
+    include ValidationErrorsConcern
+
     field :tag, Types::TagType, "The deleted tag"
     field :errors, [Types::ErrorType], "Errors occurred during deletion"
 
@@ -18,15 +20,7 @@ module Mutations
           errors: []
         }
       else
-        validation_errors = tag.errors.to_hash.map do |attribute, message|
-          {
-            attribute: attribute.to_s.camelize(:lower),
-            message: message.join(", "),
-          }
-        end
-        {
-          errors: validation_errors
-        }
+        { errors: validation_errors(tag) }
       end
     end
   end
