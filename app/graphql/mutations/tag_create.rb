@@ -9,8 +9,8 @@ module Mutations
     field :tag, Types::TagType, "The created tag"
     field :errors, [Types::ErrorType], "Errors occurred during creation"
 
-    argument :name, String, required: true
-    argument :movie_id, ID, required: false
+    argument :name, String, "Name of the tag - must be unique", required: true
+    argument :movie_id, ID, "An optional movie id to which to attach the tag", required: false
 
     def resolve(name:, movie_id: nil)
       tag = Tag.new(name: name)

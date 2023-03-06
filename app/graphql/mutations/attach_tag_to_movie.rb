@@ -4,10 +4,10 @@ module Mutations
 
     field :tag, Types::TagType
     field :movie, Types::MovieType
-
-    argument :tag_id, ID, required: true
-    argument :movie_id, ID, required: true
     field :errors, [Types::ErrorType], "Errors occurred while attaching"
+
+    argument :tag_id, ID, "The id of the tag to be attached", required: true
+    argument :movie_id, ID, "The id of the movie to which the tag will be attached", required: true
 
     def resolve(tag_id:, movie_id:)
       tag = Tag.find(tag_id)

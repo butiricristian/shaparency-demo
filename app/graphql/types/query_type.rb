@@ -25,7 +25,7 @@ module Types
     field :tags,
     [Types::TagType],
     null: false,
-    description: "Return a list of directors"
+    description: "Return a list of tags"
 
     def directors
       Director.all
